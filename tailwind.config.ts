@@ -12,7 +12,8 @@ export default {
   	extend: {
   		colors: {
   			mydarkblue: '#0A196F',
-				mylightblue: '#2f6c89',
+				mylightblue: '#658DF1',
+				mygreenish: '#2f6c89',
   			myyellow: '#FDFFA9',
   			mylightgray: '#AEAEAE',
   			mygreen: '#B3DD62',

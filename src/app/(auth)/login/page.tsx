@@ -16,6 +16,8 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 interface FormData {
   email: string;
@@ -23,6 +25,7 @@ interface FormData {
 }
 
 export default function LoginPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -39,6 +42,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: FormData) => {
     try {
+      setIsLoading(true)
       const response = await loginUser(data);
       console.log(response);
       toast({
@@ -46,8 +50,10 @@ export default function LoginPage() {
         title: "Login Successful",
         description: "Welcome back!",
       });
+      setIsLoading(false)
       router.push("/"); // Redirect after successful login
     } catch (error) {
+      setIsLoading(false)
       toast({
         variant: "destructive",
         title: "Login Failed",
@@ -106,8 +112,9 @@ export default function LoginPage() {
               type="submit"
               variant="blue"
               className="w-full h-10 rounded-lg"
+              disabled={isLoading}
             >
-              Login
+              {isLoading ? <Loader2 className="text-white animate-spin"/> : 'Login'}
             </Button>
           </form>
         </CardContent>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
 
@@ -29,6 +29,7 @@ interface FormData {
 }
 
 export default function RegisterPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
   const [step, setStep] = useState<number>(0);
@@ -60,6 +61,7 @@ export default function RegisterPage() {
   // Final submit that calls registerUser
   const onSubmit = async (data: FormData) => {
     try {
+      setIsLoading(true)
       const payload = {
         first_name: data.name,
         last_name: data.surname,
@@ -75,8 +77,10 @@ export default function RegisterPage() {
         title: "Registration Successful",
         description: "Your account has been created successfully!",
       });
+      setIsLoading(false)
       router.push("/"); // Redirect as needed
     } catch (error) {
+      setIsLoading(false)
       toast({
         variant: "destructive",
         title: "Registration Failed",
@@ -212,8 +216,8 @@ export default function RegisterPage() {
                   <span /> // placeholder to maintain spacing
                 )}
 
-                <Button type="submit" variant="blue" className={clsx('h-10 rounded-lg', step==0 && 'w-full')}>
-                  {step === totalSteps - 1 ? "Register" : "Next"}
+                <Button disabled={isLoading} type="submit" variant="blue" className={clsx('h-10 rounded-lg', step==0 && 'w-full')}>
+                  {step === totalSteps - 1 ? isLoading ? <Loader2 className="text-white animate-spin"/>  : "Register": "Next"}
                 </Button>
               </div>
               <p className="text-sm text-center w-full mt-3 text-white">
