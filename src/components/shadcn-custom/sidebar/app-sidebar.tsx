@@ -9,7 +9,6 @@ import {
   Trophy,
 } from "lucide-react";
 import { NavMain } from "@/components/shadcn-custom/sidebar/nav-main";
-import { NavUser } from "@/components/shadcn-custom/sidebar/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -53,7 +52,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         {/* {loading ? <h1>Loading...</h1> : <NavUser user={data.user} />} */}
-        <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

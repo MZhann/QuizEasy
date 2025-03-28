@@ -4,6 +4,8 @@ import { AppSidebar } from "@/components/shadcn-custom/sidebar/app-sidebar";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { Separator } from "@/components/ui/separator";
+import { NavUser } from "@/components/shadcn-custom/sidebar/nav-user";
+
 import {
   SidebarInset,
   SidebarProvider,
@@ -27,9 +29,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
         {!isNoSidebarPage && (
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset className="bg-white">
-              <header className="flex h-12 shrink-0 sticky top-0 z-50 bg-white items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 shadow">
-                <div className="flex items-center  justify-between w-full">
+            <SidebarInset className="bg-white py-2">
+              <header className="flex h-12 shrink-0 sticky top-0 z-50 bg-white items-center gap-2 transition-[width,height] ease-linear py-1 group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 shadow">
+                <div className="flex items-center  justify-between w-full ">
                   <div className="flex items-center justify-between w-full gap-2 px-4">
                     <div className="flex items-center">
                       <SidebarTrigger className="-ml-1" />
@@ -37,6 +39,13 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                       <BreadCrumbs />
                     </div>
                   </div>
+                  <NavUser
+                    user={{
+                      name: "John",
+                      email: "zhnbaolat.mukan2004@gmail.com",
+                      avatar: "https://a/wda/wda/wd",
+                    }}
+                  />
                 </div>
               </header>
               {children}

@@ -47,7 +47,7 @@ export function NavUser({
   };
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="mx-2 py-1">
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -55,15 +55,15 @@ export function NavUser({
               size="lg"
               className="ml-[0.27rem] data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg text-white">
+              <Avatar className="h-8 w-8 rounded-lg text-gray-700">
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback className="rounded-lg">Hi</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight text-white">
+              <div className="grid flex-1 text-left text-sm leading-tight text-gray-700">
                 <span className="truncate font-semibold ">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4 text-white" />
+              <ChevronsUpDown className="ml-auto size-4 text-gray-700" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

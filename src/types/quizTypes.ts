@@ -116,3 +116,16 @@ export interface GetQuizAttemptDetailsResponse {
   quiz_year: string;
   answers: AttemptAnswer[];
 }
+
+//NEW ONES
+
+export interface QuizRequest {
+  user_prompt: string;
+  question_types: string[];
+}
+
+export interface QuizResponse {
+  _id: string;
+  title: string;
+  questions: { id: string; type: string; question_text: string }[];
+}
