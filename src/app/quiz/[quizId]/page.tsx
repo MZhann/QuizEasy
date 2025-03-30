@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import {
   getOneGeneratedQuiz,
   startQuizAttempt,
   submitAnswer,
   finishQuizAttempt,
-} from '@/api/quiz';
+} from "@/api/quiz";
 import type {
   QuizQuestion,
   SubmitAnswerPayload,
   SubmitAnswerResponse,
-} from '@/types/generatedQuizTypes';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+} from "@/types/generatedQuizTypes";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface AnsweredState {
   [questionId: string]: {
@@ -26,7 +26,7 @@ interface AnsweredState {
 export default function QuizAttemptPage() {
   const { quizId } = useParams<{ quizId: string }>();
   const router = useRouter();
-  const [quizTitle, setQuizTitle] = useState('');
+  const [quizTitle, setQuizTitle] = useState("");
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -77,8 +77,8 @@ export default function QuizAttemptPage() {
       }));
       setIsFlipped(true);
     } catch (e) {
-      console.error('Ошибка при отправке ответа', e);
-      alert('Ошибка при отправке ответа');
+      console.error("Ошибка при отправке ответа", e);
+      alert("Ошибка при отправке ответа");
     }
   };
 
@@ -94,7 +94,9 @@ export default function QuizAttemptPage() {
         <h1 className="text-2xl font-bold">{quizTitle}</h1>
         <p className="text-muted-foreground">powered with ai</p>
         <p className="mt-4">Вопросов: {questions.length}</p>
-        <Button onClick={handleStart} className="mt-6">Start Quiz</Button>
+        <Button onClick={handleStart} className="mt-6">
+          Start Quiz
+        </Button>
       </div>
     );
   }
@@ -106,7 +108,9 @@ export default function QuizAttemptPage() {
   return (
     <div className="flex flex-col items-center mt-10">
       <div className="text-xl font-semibold">{quizTitle}</div>
-      <div className="text-muted-foreground">answered: {Object.keys(answered).length}/{questions.length}</div>
+      <div className="text-muted-foreground">
+        answered: {Object.keys(answered).length}/{questions.length}
+      </div>
 
       <div className="mt-10 flex gap-4">
         {[-1, 0, 1].map((offset) => {
@@ -121,22 +125,27 @@ export default function QuizAttemptPage() {
             <div
               key={q.id}
               className={cn(
-                'w-72 min-h-72 rounded-xl bg-blue-100 p-4 shadow-lg transition-transform duration-500 border-4 border-mygreenish',
-                offset === -1 && 'scale-90 translate-x-[0%] blur-sm',
-                offset === 0 && 'scale-100 z-10',
-                offset === 1 && 'scale-90 translate-x-[0%] blur-sm',
-                isBack && 'rotate-y-180',
-                'relative'
+                "w-72 min-h-72 rounded-xl bg-blue-100 p-4 shadow-lg transition-transform duration-500 border-4 border-mygreenish",
+                offset === -1 && "scale-90 translate-x-[0%] blur-sm",
+                offset === 0 && "scale-100 z-10",
+                offset === 1 && "scale-90 translate-x-[0%] blur-sm",
+                isBack && "rotate-y-180",
+                "relative"
               )}
             >
               {!isBack ? (
                 <div>
-                  <p className="font-medium text-center mb-4">{q.question_text}</p>
+                  <p className="font-medium text-center mb-4">
+                    {q.question_text}
+                  </p>
                   <div className="flex flex-col gap-2">
                     {q.options.map((opt) => (
-                      <label key={opt.label} className="flex items-center gap-2">
+                      <label
+                        key={opt.label}
+                        className="flex items-center gap-2"
+                      >
                         <input
-                          type={isMulti ? 'checkbox' : 'radio'}
+                          type={isMulti ? "checkbox" : "radio"}
                           name={`q-${q.id}`}
                           checked={selectedOptions.includes(opt.label)}
                           onChange={() => handleOptionChange(opt.label)}
@@ -147,16 +156,27 @@ export default function QuizAttemptPage() {
                     ))}
                   </div>
                   {!isAnswered && (
-                    <Button onClick={handleSubmit} className="mt-4 w-full">Submit</Button>
+                    <Button onClick={handleSubmit} className="mt-4 w-full">
+                      Submit
+                    </Button>
                   )}
                 </div>
               ) : (
                 <div className="text-center">
                   <p className="text-lg mb-2 font-medium">
-                    {answerData?.result?.correct_options.every((opt) => answerData.selected.includes(opt)) ? '✅ Correct!' : '❌ Incorrect'}
+                    {answerData?.result?.correct_options.every((opt) =>
+                      answerData.selected.includes(opt)
+                    )
+                      ? "✅ Correct!"
+                      : "❌ Incorrect"}
                   </p>
-                  <p>Correct Answer: {answerData?.result?.correct_options.join(', ')}</p>
-                  <Button onClick={handleNext} className="mt-4">Next</Button>
+                  <p>
+                    Correct Answer:{" "}
+                    {answerData?.result?.correct_options.join(", ")}
+                  </p>
+                  <Button onClick={handleNext} className="mt-4">
+                    Next
+                  </Button>
                 </div>
               )}
             </div>
@@ -176,6 +196,17 @@ export default function QuizAttemptPage() {
           Complete
         </Button>
       )}
+      <Button
+        variant="secondary"
+        className="mt-4 bg-mygreenish hover:bg-mygreenish/80 text-white mt-20" 
+        onClick={async () => {
+          if (!attemptId) return;
+          await finishQuizAttempt(attemptId);
+          router.push(`/quiz-results/${attemptId}`);
+        }}
+      >
+        Finish Session Now
+      </Button>
     </div>
   );
 }
