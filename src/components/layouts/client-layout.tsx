@@ -39,13 +39,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                       <BreadCrumbs />
                     </div>
                   </div>
-                  <NavUser
-                    user={{
-                      name: "John",
-                      email: "zhnbaolat.mukan2004@gmail.com",
-                      avatar: "https://a/wda/wda/wd",
-                    }}
-                  />
+                  <NavUser />
                 </div>
               </header>
               {children}

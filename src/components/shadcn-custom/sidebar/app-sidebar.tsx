@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
+  ArrowBigUp,
   House,
   NotepadText,
   SearchSlash,
-  Trophy,
 } from "lucide-react";
 import { NavMain } from "@/components/shadcn-custom/sidebar/nav-main";
 import {
@@ -29,7 +29,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       { title: "Home", url: "/", icon: House },
       { title: "Quizzes", url: "/quizzes", icon: NotepadText },
       { title: "Mistake Bank", url: "/mistake-bank", icon: SearchSlash },
-      { title: "Statistics", url: "/statistics", icon: Trophy },
+      { title: "Leaderboard", url: "/leaderboard", icon: ArrowBigUp },
       // { title: "Admin page", url: "/admin", icon: LockKeyhole },
     ],
   };

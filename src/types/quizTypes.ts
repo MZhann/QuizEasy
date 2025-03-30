@@ -126,6 +126,27 @@ export interface QuizRequest {
 
 export interface QuizResponse {
   _id: string;
+  user_id: string;
   title: string;
-  questions: { id: string; type: string; question_text: string }[];
+  questions: {
+    id: string;
+    type: string;
+    question_text: string;
+    options: {
+      label: string;
+      option_text: string;
+      is_correct: boolean;
+    }[];
+  }[];
 }
+
+
+
+export interface GeneratedQuiz {
+  id: string;
+  user_id: string;
+  title: string;
+}
+
+export type GetAllGeneratedQuizzesResponse = GeneratedQuiz[];
+

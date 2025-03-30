@@ -1,16 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { generateQuiz } from "@/api/quiz"; 
+import { generateQuiz } from "@/api/quiz";
 import { Loader2 } from "lucide-react";
+import { QuizResponse } from "@/types/quizTypes";
+import { useRouter } from "next/navigation";
+
+// const [quiz, setQuiz] = useState<QuizResponse | null>(null);
 
 const QuizGeneration = () => {
+  const router = useRouter();
   const [prompt, setPrompt] = useState("");
-  const [selectedTypes, setSelectedTypes] = useState<string[]>(["single_choice"]);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([
+    "single_choice",
+  ]);
   const [loading, setLoading] = useState(false);
-  
-  const [quiz, setQuiz] = useState<{ _id: string; title: string; questions: { id: string; type: string; question_text: string }[] } | null>(null);
- 
+
+  const [quiz, setQuiz] = useState<QuizResponse | null>(null);
+
   const [error, setError] = useState("");
 
   const handleCheckboxChange = (type: string) => {
@@ -18,6 +25,12 @@ const QuizGeneration = () => {
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
     );
   };
+
+  const handleStartQuiz = (quizId: string) => {
+    // Redirect to the quiz attempt page with the quiz ID
+    router.push(`/quiz/${quizId}`);
+  };
+  
 
   const handleGenerateQuiz = async () => {
     if (!prompt || selectedTypes.length === 0) {
@@ -88,11 +101,17 @@ const QuizGeneration = () => {
       <button
         onClick={handleGenerateQuiz}
         className={`mt-4 w-full py-3 text-white font-semibold rounded-md ${
-          loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#2f6c89] hover:bg-[#2f6c89]/80"
+          loading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-[#2f6c89] hover:bg-[#2f6c89]/80"
         }`}
         disabled={loading}
       >
-        {loading ? <Loader2 className="inline-block animate-spin" size={20} /> : "Generate"}
+        {loading ? (
+          <Loader2 className="inline-block animate-spin" size={20} />
+        ) : (
+          "Generate"
+        )}
       </button>
 
       {/* Error Message */}
@@ -102,8 +121,9 @@ const QuizGeneration = () => {
       {quiz && (
         <div className="mt-6 p-4 border rounded-lg bg-gray-100 shadow-sm">
           <h2 className="text-lg font-semibold">{quiz.title}</h2>
+          <p className="text-gray-400">{quiz._id}</p>
           <p className="text-gray-500">{quiz.questions.length} questions</p>
-          <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => handleStartQuiz(quiz._id)}>
             Start Quiz
           </button>
         </div>

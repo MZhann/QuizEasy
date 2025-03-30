@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { updateProfile } from "@/api/user"; // Uses the updateProfile function from api/user.ts
 import { useToast } from "@/hooks/use-toast";
+import UserLeaderboardStats from "./leaderboard-my";
 
 interface ProfileDataProps {
   firstName: string;
@@ -99,7 +100,7 @@ const ProfileData = ({
         </button>
       </div>
 
-      <div className="w-full flex items-center gap-5 mt-4 text-[#152759]">
+      <div className="w-full flex justify-center items-center gap-5 mt-4 text-[#152759]">
         <Image
           src={"/assets/images/decoration/avatar.png"}
           width={100}
@@ -113,6 +114,9 @@ const ProfileData = ({
           <p>{email}</p>
         </div>
       </div>
+
+
+      <UserLeaderboardStats />
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

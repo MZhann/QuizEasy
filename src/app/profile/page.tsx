@@ -5,6 +5,8 @@ import { getProfile } from "@/api/user"; // Adjust the import path as needed
 import {ProfileResponse} from "@/types/userTypes"
 import ProfileData from "@/components/page-components/profile-page/profile-data";
 import { Loader2 } from "lucide-react";
+import UserStats from "@/components/page-components/profile-page/statistics-section";
+import MyGeneratedQuizzes from "@/components/page-components/profile-page/generated-quizes";
 
 const Profile = () => {
   const [profile, setProfile] = useState<ProfileResponse | null>(null);
@@ -38,6 +40,8 @@ const Profile = () => {
   return (
     <div className="flex flex-col w-full items-center px-20 pt-10">
       <ProfileData firstName={profile.first_name} lastName={profile.last_name} email={profile.email} setTriggerProfileInfo={setTriggerProfileInfo} triggerProfileInfo = {triggerProfileInfo} />
+      <UserStats />
+      <MyGeneratedQuizzes />
     </div>
   );
 };
