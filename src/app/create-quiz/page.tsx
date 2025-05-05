@@ -71,8 +71,8 @@ const QuizGeneration = () => {
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="Generate me a quiz with 10 questions about mathematics..."
-        className="w-full mt-2 p-3 border rounded-md bg-[#2f6c89]/20 focus:outline-none focus:ring-2 focus:ring-[#2f6c89]"
-        rows={4}
+        className="w-full mt-2 p-3 border-4 border-teal-600 shadow-xl rounded-2xl bg-cyan-50"  
+        rows={6}
       />
 
       {/* Question Type Selection */}

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
+import Image from "next/image";
+import clsx from "clsx";
 
 interface GeneratedQuiz {
   id: string;
@@ -47,7 +49,19 @@ const Quizzes = () => {
   return (
     <div className="p-6 px-20">
       <h2 className="text-2xl font-semibold mt-4">Global quizzes</h2>
-
+      <div className="flex items-center gap-4 mt-5">
+        <Image
+          src={"/assets/images/decoration/mini-man.png"}
+          width={70}
+          height={70}
+          alt="mini man"
+        />
+        <p className="italic text-lg leading-5 text-gray-500 mt-2">
+          &quot;All the quizzes, generated on this platform will be seen here! <br />
+          So you can always find something interesting and help the <br />
+          community to gain knowledge!&quot;
+        </p>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-11">
         {loading
           ? Array.from({ length: 6 }).map((_, idx) => (
@@ -55,9 +69,18 @@ const Quizzes = () => {
             ))
           : quizzes.map((quiz) => (
               <Link key={quiz.id} href={`/quiz/${quiz.id}`}>
-                <Card className="cursor-pointer hover:-mt-1 duration-200 transition-all hover:shadow-lg transition-shadow bg-[url('/assets/images/decoration/main-page-block-bg.svg')] bg-cover bg-center text-white rounded-xl">
+                <Card
+                  className={clsx(
+                    "cursor-pointer hover:-mt-1 hover:shadow-lg transition-all duration-200 bg-cover bg-center text-white rounded-xl",
+                    quizzes.indexOf(quiz) % 2 === 0
+                      ? "bg-[url('/assets/images/decoration/main-page-block-bg.svg')]"
+                      : "bg-[url('/assets/images/decoration/background-2.svg')] text-orange-700"
+                  )}
+                >
                   <CardContent className="p-6 flex flex-col justify-between h-32">
-                    <div className="text-xl font-semibold underline">{quiz.title}</div>
+                    <div className="text-xl font-semibold underline">
+                      {quiz.title}
+                    </div>
                   </CardContent>
                 </Card>
               </Link>

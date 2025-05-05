@@ -59,7 +59,9 @@ export default function MistakeQuizPage() {
   const handleOptionChange = (label: string, isMulti: boolean) => {
     if (isMulti) {
       setSelectedOptions((prev) =>
-        prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]
+        prev.includes(label)
+          ? prev.filter((l) => l !== label)
+          : [...prev, label]
       );
     } else {
       setSelectedOptions([label]);
@@ -99,7 +101,7 @@ export default function MistakeQuizPage() {
   // Intro screen
   if (!sessionId) {
     return (
-      <div className="flex flex-col items-center mt-20 px-6 md:px-16 text-center">
+      <div className="flex flex-col items-center mt-10 px-6 md:px-16 text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,15 +124,24 @@ export default function MistakeQuizPage() {
             height={200}
           />
         </motion.div>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="mb-4 max-w-xl text-gray-700"
+          className="mb-4 text-gray-700 flex items-center gap-5"
         >
-          Your personal smart mistake bank collects all the questions you answered
-          incorrectly. Practice them here until you’ve mastered every concept.
-        </motion.p>
+          <Image
+            src={"/assets/images/decoration/mini-man.png"}
+            width={100}
+            height={100}
+            alt="mini man"
+          />
+          <p className="text-lg text-start leading-5 text-gray-500 mt-2 italic">
+            &quot;Your personal smart mistake bank collects all the questions<br/>
+            you answered incorrectly. Practice them here<br/> until you’ve mastered
+            every concept.&quot;
+          </p>
+        </motion.div>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -164,11 +175,12 @@ export default function MistakeQuizPage() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="text-center mb-6"
+        className="mb-6"
       >
         <h2 className="text-2xl font-semibold">Mistake Quiz</h2>
         <p className="text-gray-500">
-          Question {currentIndex + 1} of {questions.length} • Total in bank: {allCount}
+          Question {currentIndex + 1} of {questions.length} • Total in bank:{" "}
+          {allCount}
         </p>
       </motion.div>
 
@@ -226,13 +238,12 @@ export default function MistakeQuizPage() {
           >
             <p className="text-xl font-semibold mb-2">
               {answered[current.question_id].result.correct
-                ? '✅ Correct!'
-                : '❌ Incorrect'}
+                ? "✅ Correct!"
+                : "❌ Incorrect"}
             </p>
             <p className="mb-4">
-              Correct: {answered[current.question_id].result.correct_options.join(
-                ', '
-              )}
+              Correct:{" "}
+              {answered[current.question_id].result.correct_options.join(", ")}
             </p>
             <Button onClick={handleNext}>Next</Button>
           </div>
