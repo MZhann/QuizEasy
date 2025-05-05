@@ -61,9 +61,9 @@ export default function MainPage() {
             <div
               className={`h-40 ${
               index % 2 === 0
-                ? "bg-[url('/assets/images/decoration/main-page-block-bg.svg')]"
+                ? "bg-[url('/assets/images/decoration/main-page-block-bg.svg')] text-white"
                 : "bg-[url('/assets/images/decoration/background-2.svg')] text-orange-700"
-              } bg-cover bg-center rounded-xl flex flex-col items-center justify-center text-white cursor-pointer transition-all duration-200 hover:scale-105 hover:saturate-150`}
+              } bg-cover bg-center rounded-xl flex flex-col items-center justify-center cursor-pointer transition-all duration-200 hover:scale-105 hover:saturate-150`}
             >
               <h2 className="underline text-2xl font-bold uppercase text-center">
               {title}

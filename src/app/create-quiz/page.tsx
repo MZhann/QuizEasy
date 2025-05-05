@@ -30,7 +30,6 @@ const QuizGeneration = () => {
     // Redirect to the quiz attempt page with the quiz ID
     router.push(`/quiz/${quizId}`);
   };
-  
 
   const handleGenerateQuiz = async () => {
     if (!prompt || selectedTypes.length === 0) {
@@ -71,7 +70,7 @@ const QuizGeneration = () => {
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="Generate me a quiz with 10 questions about mathematics..."
-        className="w-full mt-2 p-3 border-4 border-teal-600 shadow-xl rounded-2xl bg-cyan-50"  
+        className="w-full mt-2 p-3 border-4 border-teal-600 shadow-xl rounded-2xl bg-cyan-50"
         rows={6}
       />
 
@@ -100,9 +99,17 @@ const QuizGeneration = () => {
       {/* Generate Button */}
       <button
         onClick={handleGenerateQuiz}
-        className={`mt-4 w-full py-3 text-white font-semibold rounded-md ${
+        className={`mt-4 w-full py-3 text-white font-semibold rounded-md bg-gradient-to-r
+          from-indigo-500
+          via-purple-500
+          to-pink-500
+        bg-[length:200%_200%]
+        hover:brightness-125
+        hover:transition-colors
+        hover:duration-600
+        animate-gradient ${
           loading
-            ? "bg-gray-400 cursor-not-allowed"
+            ? "cursor-not-allowed bg-[#2f6c89] hover:bg-[#2f6c89]/80 brightness-75"
             : "bg-[#2f6c89] hover:bg-[#2f6c89]/80"
         }`}
         disabled={loading}
@@ -119,13 +126,30 @@ const QuizGeneration = () => {
 
       {/* Quiz Info Display */}
       {quiz && (
-        <div className="mt-6 p-4 border rounded-lg bg-gray-100 shadow-sm">
-          <h2 className="text-lg font-semibold">{quiz.title}</h2>
-          <p className="text-gray-400">{quiz._id}</p>
-          <p className="text-gray-500">{quiz.questions.length} questions</p>
-          <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => handleStartQuiz(quiz._id)}>
-            Start Quiz
-          </button>
+        <div
+          className="
+          mt-6
+          rounded-2xl
+          p-[6px]             /* thin wrapper for the “border” */
+          bg-gradient-to-r
+            from-indigo-500
+            via-purple-500
+            to-pink-500
+          bg-[length:200%_200%]
+          animate-gradient
+        "
+        >
+          <div className="bg-blue-100 rounded-xl p-4">
+            <h2 className="text-lg text-purple-700 font-bold">{quiz.title}</h2>
+            <p className="text-gray-400">{quiz._id}</p>
+            <p className="text-purple-700">{quiz.questions.length} questions</p>
+            <button
+              className="mt-2 rounded-lg px-4 py-2 p-[6px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-[length:200%_200%] animate-gradient text-white hover:bg-blue-600"
+              onClick={() => handleStartQuiz(quiz._id)}
+            >
+              Start Quiz
+            </button>
+          </div>
         </div>
       )}
     </div>
