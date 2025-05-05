@@ -1,65 +1,40 @@
-"use client";
+import { HeroSection } from "@/components/page-components/landing-page/hero-section";
+import { FeaturesSection } from "@/components/page-components/landing-page/features-section";
+import { HowItWorksSection } from "@/components/page-components/landing-page/how-it-works-section";
+import { CTASection } from "@/components/page-components/landing-page/cta-section";
+import { Navbar } from "@/components/page-components/landing-page/navbar";
+import { Footer } from "@/components/page-components/landing-page/footer";
+import { StepsCarouselSection } from "@/components/page-components/landing-page/steps-carousel-section";
+import { LogosScroller, Logo } from "@/components/page-components/landing-page/scroller-logos";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { getProfile } from "@/api/user";
 
-const menuItems = [
-  {
-    title: "Create Quiz",
-    route: "/create-quiz",
-    description: "Create your own custom test on any topic",
-  },
-  {
-    title: "Quizzes",
-    route: "/quizzes",
-    description: "Take available AI-generated quizzes",
-  },
-  {
-    title: "Mistakes",
-    route: "/mistakes",
-    description: "Practice questions you’ve previously answered incorrectly",
-  },
-  {
-    title: "Leaderboard",
-    route: "/leaderboard",
-    description: "See how you rank among other students",
-  },
+const logos: Logo[] = [
+  { src: "/assets/images/decoration/logo.jpg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/sdu.svg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/logo.jpg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/sdu.svg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/logo.jpg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/sdu.svg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/logo.jpg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/sdu.svg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/logo.jpg", alt: "logo", width: 120, height: 120 },
+  { src: "/assets/images/decoration/sdu.svg", alt: "logo", width: 120, height: 120 },
 ];
 
-export default function MainPage() {
-  const router = useRouter();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        await getProfile();
-      } catch (e) {
-        console.error("Error fetching profile:", e);
-        router.push("/login");
-      }
-    };
-    checkAuth();
-  }, [router]);
-
+export default function Page() {
   return (
     <>
-      <h2 className="text-2xl font-semibold mt-10 px-20">Home page</h2>
-      <div className="w-full px-20 pt-10 mx-auto grid grid-cols-3 gap-6">
-        {menuItems.map(({ title, route, description }, index) => (
-          <Link key={index} href={route} passHref>
-            <div className="h-40 bg-[url('/assets/images/decoration/main-page-block-bg.svg')] bg-cover bg-center rounded-xl flex flex-col items-center justify-center text-white cursor-pointer transition-transform hover:scale-105">
-              <h2 className="underline text-2xl font-bold uppercase text-center">
-                {title}
-              </h2>
-              <p className="text-center mt-2 text-white/90 text-sm leading-tight">
-                {description}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <Navbar />
+      <main className="flex flex-col gap-32 px-6 py-16 md:px-16 lg:px-32 bg-gray-50">
+        <HeroSection id="hero" />
+        <LogosScroller logos={logos} duration={15} gapPx={24} />
+        <FeaturesSection id="features" />
+        <HowItWorksSection id="why-us" />
+        <StepsCarouselSection id="how-it-works" />
+        <CTASection id="cta" />
+      </main>
+      <Footer />
     </>
   );
 }

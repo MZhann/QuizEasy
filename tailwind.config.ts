@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
     darkMode: ["class"],
+		
     content: [
 		"./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -81,6 +82,10 @@ export default {
   			]
   		},
   		keyframes: {
+				marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
   			'accordion-down': {
   				from: {
   					height: '0'
@@ -100,7 +105,8 @@ export default {
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+				marquee: "marquee var(--marquee-duration,20s) linear infinite",
   		}
   	}
   },

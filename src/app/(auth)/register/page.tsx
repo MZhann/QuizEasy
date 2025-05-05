@@ -78,7 +78,7 @@ export default function RegisterPage() {
         description: "Your account has been created successfully!",
       });
       setIsLoading(false)
-      router.push("/"); // Redirect as needed
+      router.push("/home"); // Redirect as needed
     } catch (error) {
       setIsLoading(false)
       toast({

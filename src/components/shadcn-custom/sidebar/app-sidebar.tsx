@@ -26,7 +26,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       avatar: "/assets/images/profile-pics/robot-avatar.png",
     },
     navMain: [
-      { title: "Home", url: "/", icon: House },
+      { title: "Home", url: "/home", icon: House },
       { title: "Quizzes", url: "/quizzes", icon: NotepadText },
       { title: "Mistake Bank", url: "/mistake-bank", icon: SearchSlash },
       { title: "Leaderboard", url: "/leaderboard", icon: ArrowBigUp },
@@ -37,7 +37,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <Link href={"/"}>
+        <Link href={"/home"}>
             <Image
               src={"/assets/images/decoration/logo-hor.jpg"}
               className="rounded-lg"

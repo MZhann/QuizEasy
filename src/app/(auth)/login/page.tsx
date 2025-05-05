@@ -51,7 +51,7 @@ export default function LoginPage() {
         description: "Welcome back!",
       });
       setIsLoading(false)
-      router.push("/"); // Redirect after successful login
+      router.push("/home"); // Redirect after successful login
     } catch (error) {
       setIsLoading(false)
       toast({
