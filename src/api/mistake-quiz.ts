@@ -1,4 +1,12 @@
-import { StartMistakeSessionResponse, MistakeQuestion, StartMistakeQuizResponse, MistakeQuizSessionResultsResponse, SubmitMistakeAnswerPayload, SubmitMistakeAnswerResponse, CompleteMistakeSessionResponse } from "@/types/mistakeQuizTypes";
+import {
+  StartMistakeSessionResponse,
+  MistakeQuestion,
+  StartMistakeQuizResponse,
+  MistakeQuizSessionResultsResponse,
+  SubmitMistakeAnswerPayload,
+  SubmitMistakeAnswerResponse,
+  CompleteMistakeSessionResponse,
+} from "@/types/mistakeQuizTypes";
 
 const BASE_URL = "https://untis-production-0de8.up.railway.app/api/v1/mistake";
 
@@ -63,22 +71,44 @@ export const completeMistakeQuizSession = async (
   return await response.json();
 };
 
+// export const startMistakeQuizSession = async (): Promise<StartMistakeSessionResponse> => {
+//   const response = await fetch(`${BASE_URL}/start_mistake_quiz_session/`, {
+//     method: "GET",
+//     headers: {
+//       Accept: "application/json",
+//       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+//     },
+//   });
 
-export const startMistakeQuizSession = async (): Promise<StartMistakeSessionResponse> => {
-  const response = await fetch(`${BASE_URL}/start_mistake_quiz_session/`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  });
+//   if (!response.ok) {
+//     throw new Error("Не удалось начать сессию ошибки");
+//   }
 
-  if (!response.ok) {
-    throw new Error("Не удалось начать сессию ошибки");
-  }
+//   return await response.json();
+// };
 
-  return await response.json();
-};
+export const startMistakeQuizSession =
+  async (): Promise<StartMistakeSessionResponse> => {
+    const response = await fetch(`${BASE_URL}/start_mistake_quiz_session/`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+
+    if (!response.ok) {
+      // read error body and throw with its detail
+      
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+      const errBody = await response.json().catch(() => ({} as any));
+      const message =
+        (errBody.detail as string) || "Не удалось начать сессию ошибки";
+      throw new Error(message);
+    }
+
+    return await response.json();
+  };
 
 export const submitMistakeAnswer = async (
   session_id: string,
@@ -103,7 +133,6 @@ export const submitMistakeAnswer = async (
 
   return await response.json();
 };
-
 
 export const startMistakeQuiz = async (): Promise<StartMistakeQuizResponse> => {
   try {
@@ -131,10 +160,11 @@ export const startMistakeQuiz = async (): Promise<StartMistakeQuizResponse> => {
   }
 };
 
-
 import { AllMistakeSessionsResponse } from "@/types/mistakeQuizTypes";
 
-export const getAllMistakeSessions = async (): Promise<AllMistakeSessionsResponse[]> => {
+export const getAllMistakeSessions = async (): Promise<
+  AllMistakeSessionsResponse[]
+> => {
   const response = await fetch(
     `https://untis-production-0de8.up.railway.app/api/v1/mistake/all_mistake_quiz_sessions/`,
     {

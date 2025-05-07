@@ -47,7 +47,7 @@ const Quizzes = () => {
   }, []);
 
   return (
-    <div className="p-6 px-20">
+    <div className="p-6 px-4 md:px-20">
       <h2 className="text-2xl font-semibold mt-4">Global quizzes</h2>
       <div className="flex items-center gap-4 mt-5">
         <Image
@@ -78,7 +78,7 @@ const Quizzes = () => {
                   )}
                 >
                   <CardContent className="p-6 flex flex-col justify-between h-32">
-                    <div className="text-xl font-semibold underline">
+                    <div className="text-xl font-semibold underline overflow-hidden">
                       {quiz.title}
                     </div>
                   </CardContent>

@@ -9,6 +9,7 @@ import {
   submitMistakeAnswer,
   completeMistakeQuizSession,
   getAllMistakeQuestions,
+  getAllMistakeSessions,
 } from "@/api/mistake-quiz";
 import {
   MistakeQuizQuestion,
@@ -48,13 +49,78 @@ export default function MistakeQuizPage() {
 
   const handleStart = async () => {
     try {
-      const data = await startMistakeQuizSession();
-      setSessionId(data.session_id);
-      setQuestions(data.questions);
-    } catch {
-      alert("Failed to start session.");
+      const { session_id, questions } = await startMistakeQuizSession();
+      setSessionId(session_id);
+      setQuestions(questions);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "";
+      // adjust this phrase to match your backend's "already active" message
+      if (
+        msg.includes("active mistake quiz session") ||
+        msg.includes("активную сессию")
+      ) {
+        try {
+          // finish any in-progress session
+          const sessions = await getAllMistakeSessions();
+          const active = sessions.find((s) => s.status === "in_progress");
+          if (active) {
+            await completeMistakeQuizSession(active._id);
+          }
+          // retry
+          const { session_id, questions } = await startMistakeQuizSession();
+          setSessionId(session_id);
+          setQuestions(questions);
+          return;
+        } catch (cleanupError) {
+          console.error("Ошибка завершения предыдущей сессии:", cleanupError);
+        }
+      }
+      console.error("handleStart error:", err);
+      alert("Не удалось начать практику. Попробуйте позже.");
     }
   };
+
+  // const handleStart = async () => {
+  //   try {
+  //     // Try starting a new session
+  //     const data = await startMistakeQuizSession();
+  //     setSessionId(data.session_id);
+  //     setQuestions(data.questions);
+  //   } catch (err) {
+  //     // If there's already an active session, clean it up and retry
+  //     const msg = err instanceof Error ? err.message : "";
+  //     if (msg.includes("active mistake quiz session")) {
+  //       try {
+  //         // Fetch all sessions and find the active one
+  //         const sessions: AllMistakeSessionsResponse[] =
+  //           await getAllMistakeSessions();
+  //         const active = sessions.find((s) => s.status === "in_progress");
+  //         if (active) {
+  //           await completeMistakeQuizSession(active._id);
+  //         }
+  //         // Retry starting
+  //         const retry = await startMistakeQuizSession();
+  //         setSessionId(retry.session_id);
+  //         setQuestions(retry.questions);
+  //         return;
+  //       } catch (cleanupError) {
+  //         console.error("Failed to clear previous session:", cleanupError);
+  //       }
+  //     }
+  //     console.error("handleStart error:", err);
+  //     alert("Failed to start practice session.");
+  //   }
+  // };
+  // const handleStart = async () => {
+  //   try {
+  //     const data = await startMistakeQuizSession();
+  //     setSessionId(data.session_id);
+  //     setQuestions(data.questions);
+  //   } catch(error) {
+  //     // if(error.deta)
+  //     alert("Failed to start session.");
+  //   }
+  // };
 
   const handleOptionChange = (label: string, isMulti: boolean) => {
     if (isMulti) {
@@ -137,9 +203,10 @@ export default function MistakeQuizPage() {
             alt="mini man"
           />
           <p className="text-lg text-start leading-5 text-gray-500 mt-2 italic">
-            &quot;Your personal smart mistake bank collects all the questions<br/>
-            you answered incorrectly. Practice them here<br/> until you’ve mastered
-            every concept.&quot;
+            &quot;Your personal smart mistake bank collects all the questions
+            <br />
+            you answered incorrectly. Practice them here
+            <br /> until you’ve mastered every concept.&quot;
           </p>
         </motion.div>
         <motion.p
@@ -198,13 +265,13 @@ export default function MistakeQuizPage() {
           style={{ transformStyle: "preserve-3d", perspective: 1000 }}
           className={cn(
             "bg-yellow-100 rounded-xl p-6 shadow-lg relative border-4 border-yellow-400",
-            "min-h-[250px]"
+            "h-[450px] md:min-h-[250px]"
           )}
         >
           {/* Front */}
           <div
             style={{ backfaceVisibility: "hidden" }}
-            className="absolute inset-0 flex flex-col"
+            className="absolute inset-0 flex flex-col p-6"
           >
             <p className="font-medium mb-4">{current.question_text}</p>
             <div className="flex flex-col gap-3 flex-1">
@@ -227,8 +294,7 @@ export default function MistakeQuizPage() {
               </Button>
             )}
           </div>
-
-          {/* Back */}
+          {/* Back
           <div
             style={{
               transform: "rotateY(180deg)",
@@ -244,6 +310,28 @@ export default function MistakeQuizPage() {
             <p className="mb-4">
               Correct:{" "}
               {answered[current.question_id].result.correct_options.join(", ")}
+            </p>
+            <Button onClick={handleNext}>Next</Button>
+          </div> */}
+          {/* Back */}
+          <div
+            style={{
+              transform: "rotateY(180deg)",
+              backfaceVisibility: "hidden",
+            }}
+            className="absolute inset-0 flex flex-col p-10 items-center justify-center text-center"
+          >
+            {/* use optional chaining in case answered[...] is undefined */}
+            <p className="text-xl font-semibold mb-2">
+              {answered[current.question_id]?.result.correct
+                ? "✅ Correct!"
+                : "❌ Incorrect"}
+            </p>
+            <p className="mb-4">
+              Correct:{" "}
+              {answered[current.question_id]?.result.correct_options.join(
+                ", "
+              ) ?? "—"}
             </p>
             <Button onClick={handleNext}>Next</Button>
           </div>
