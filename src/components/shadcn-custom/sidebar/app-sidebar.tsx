@@ -2,12 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowBigUp,
-  House,
-  NotepadText,
-  SearchSlash,
-} from "lucide-react";
 import { NavMain } from "@/components/shadcn-custom/sidebar/nav-main";
 import {
   Sidebar,
@@ -26,10 +20,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       avatar: "/assets/images/profile-pics/robot-avatar.png",
     },
     navMain: [
-      { title: "Home", url: "/home", icon: House },
-      { title: "Quizzes", url: "/quizzes", icon: NotepadText },
-      { title: "Mistake Bank", url: "/mistake-bank", icon: SearchSlash },
-      { title: "Leaderboard", url: "/leaderboard", icon: ArrowBigUp },
+      { title: "Home", url: "/home"},
+      { title: "Quizzes", url: "/quizzes"},
+      { title: "Mistake Bank", url: "/mistakes"},
+      { title: "Leaderboard", url: "/leaderboard"},
       // { title: "Admin page", url: "/admin", icon: LockKeyhole },
     ],
   };

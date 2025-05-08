@@ -13,6 +13,7 @@ import {
   SidebarMenuItem,
   // SidebarSeparator,
 } from "@/components/ui/sidebar";
+// import { text } from "stream/consumers";
 // import { ChevronDown, ChevronRight, GraduationCap } from "lucide-react";
 // import {
   // Collapsible,
@@ -48,9 +49,9 @@ export function NavMain({
             , 'text-white')}
           >
             <Link href={item.url}>
-              <SidebarMenuButton tooltip={item.title}>
+              <SidebarMenuButton  tooltip={item.title}>
                 <p>{item.icon && <item.icon />}</p>
-                <span className="text-base font-thin">{item.title}</span>
+                <span className="text-base font-thin" style={{color:'gray', font:"bold"}}>{item.title}</span>
               </SidebarMenuButton>
             </Link>
           </SidebarMenuItem>

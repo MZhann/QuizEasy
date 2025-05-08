@@ -19,7 +19,7 @@ const menuItems = [
   },
   {
     title: "Mistakes",
-    route: "/mistake-bank",
+    route: "/mistakes",
     description: "Practice questions you’ve previously answered incorrectly",
   },
   {
@@ -93,7 +93,7 @@ export default function MainPage() {
               className={`
             h-40
             bg-cover bg-center
-            rounded-xl
+            rounded-sm
             flex flex-col items-center justify-center
             cursor-pointer transition-all duration-200
             hover:scale-105 hover:saturate-150
