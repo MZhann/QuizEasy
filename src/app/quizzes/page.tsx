@@ -71,10 +71,10 @@ const Quizzes = () => {
               <Link key={quiz.id} href={`/quiz/${quiz.id}`}>
                 <Card
                   className={clsx(
-                    "cursor-pointer hover:-mt-1 hover:shadow-lg transition-all duration-200 bg-cover bg-center text-white rounded-xl",
+                    "cursor-pointer hover:bg-[url('/assets/images/decoration/main-page-block-bg.svg')] hover:text-white hover:-mt-1 hover:shadow-lg transition-all duration-300 bg-cover border-8 bg-center text-mygreenish rounded-xl",
                     quizzes.indexOf(quiz) % 2 === 0
-                      ? "bg-[url('/assets/images/decoration/main-page-block-bg.svg')]"
-                      : "bg-[url('/assets/images/decoration/background-2.svg')] text-orange-700"
+                      ? "bg-[]"
+                      : "bg-[url('/assets/images/decoration/background-2.svg')"
                   )}
                 >
                   <CardContent className="p-6 flex flex-col justify-between h-32">

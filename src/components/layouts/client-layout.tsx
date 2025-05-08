@@ -4,7 +4,7 @@ import { AppSidebar } from "@/components/shadcn-custom/sidebar/app-sidebar";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { Separator } from "@/components/ui/separator";
-import { NavUser } from "@/components/shadcn-custom/sidebar/nav-user";
+// import { NavUser } from "@/components/shadcn-custom/sidebar/nav-user";
 
 import {
   SidebarInset,
@@ -37,7 +37,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                       <Separator orientation="vertical" className="mr-2 h-4" />
                     </div>
                   </div>
-                  <NavUser />
+                  {/* <NavUser /> */}
                 </div>
               </header>
               {children}

@@ -27,6 +27,11 @@ const menuItems = [
     route: "/leaderboard",
     description: "See how you rank among other students",
   },
+  {
+    title: "Profile",
+    route: "/profile",
+    description: "Profile",
+  },
 ];
 
 export default function MainPage() {

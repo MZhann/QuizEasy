@@ -1,17 +1,17 @@
 "use client";
 
 import {
-  BadgeCheck,
+  // BadgeCheck,
   ChevronsUpDown,
   LogOut,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
+  // DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -85,14 +85,14 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
-            <DropdownMenuGroup>
+            {/* <DropdownMenuGroup>
               <Link href={"/profile"}>
                 <DropdownMenuItem>
                   <BadgeCheck />
                   Profile
                 </DropdownMenuItem>
               </Link>
-            </DropdownMenuGroup>
+            </DropdownMenuGroup> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} aria-label="кнопка выйти">
               <LogOut />
