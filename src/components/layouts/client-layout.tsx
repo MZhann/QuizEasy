@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sidebar";
 
 import { usePathname } from "next/navigation";
-import BreadCrumbs from "../shadcn-custom/breadcrumps";
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -36,7 +35,6 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                     <div className="flex items-center">
                       <SidebarTrigger className="-ml-1" />
                       <Separator orientation="vertical" className="mr-2 h-4" />
-                      <BreadCrumbs />
                     </div>
                   </div>
                   <NavUser />

@@ -96,11 +96,11 @@ export default function MainPage() {
             rounded-sm
             flex flex-col items-center justify-center
             cursor-pointer transition-all duration-200
-            hover:scale-105 hover:saturate-150
+            hover:scale-105 hover:saturate-150 border-8 bg-mygreenish/20
             ${
               index % 2 === 0
-                ? "bg-[url('/assets/images/decoration/main-page-block-bg.svg')] text-white"
-                : "bg-[url('/assets/images/decoration/background-2.svg')] text-orange-700"
+                ? "text-mygreenish"
+                : "text-mygreenish"
             }
           `}
             >
