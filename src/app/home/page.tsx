@@ -18,13 +18,13 @@ const menuItems = [
     description: "Take available AI-generated quizzes",
   },
   {
-    title: "Mistakes",
-    route: "/mistakes",
+    title: "Work on Mistakes",
+    route: "/work-on-mistakes",
     description: "Practice questions you’ve previously answered incorrectly",
   },
   {
-    title: "Leaderboard",
-    route: "/leaderboard",
+    title: "User Ratings",
+    route: "/user-ratings",
     description: "See how you rank among other students",
   },
   {
@@ -109,7 +109,7 @@ export default function MainPage() {
             }
           `}
             >
-              <h2 className="underline text-xl sm:text-2xl font-bold uppercase text-center transition-colors duration-200 group-hover:text-yellow-300">
+              <h2 className="underline text-xl sm:text-2xl font-bold uppercase text-center transition-colors duration-200 group-hover:text-[#af4375]">
                 {title}
               </h2>
               <p className="text-center mt-2 text-sm leading-tight px-2">

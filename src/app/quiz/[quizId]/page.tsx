@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import Lottie from "lottie-react";
+import fireworksAnimation from "../../../animations/lottie/fireworks.json";
 import {
   getOneGeneratedQuiz,
   startQuizAttempt,
@@ -90,13 +93,35 @@ export default function QuizAttemptPage() {
 
   if (!attemptId) {
     return (
-      <div className="text-center mt-20">
-        <h1 className="text-2xl font-bold">{quizTitle}</h1>
-        <p className="text-muted-foreground">powered with ai</p>
-        <p className="mt-4">Вопросов: {questions.length}</p>
-        <Button onClick={handleStart} className="mt-6">
-          Start Quiz
-        </Button>
+      <div
+        className="text-center w-full h-screen flex flex-col items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/assets/images/decoration/pink-bg.png')",
+        }}
+      >
+        <div className="bg-white w-96 -mt-32 rounded-2xl p-10 relative">
+          <Image
+            src="/assets/images/decoration/megaphone.png"
+            alt="megaphone"
+            width={200}
+            height={200}
+            className="absolute -left-20 -top-20"
+          />
+          <Image
+            src="/assets/images/decoration/cube-questions.png"
+            alt="cube-questions"
+            width={130}
+            height={130}
+            className="absolute -right-16 -top-16 rotate-12"
+          />
+          <h1 className="text-3xl text-[#b2326d] font-bold">QUIZ TIME</h1>
+          <h2 className="text-2xl text-[#b2326d] font-bold">{quizTitle}</h2>
+          <p className="text-muted-foreground">powered with ai</p>
+          <p className="mt-4">Вопросов: {questions.length}</p>
+          <Button onClick={handleStart} className="mt-6 bg-[#b2326d]">
+            Start Quiz
+          </Button>
+        </div>
       </div>
     );
   }
@@ -106,9 +131,16 @@ export default function QuizAttemptPage() {
   const isAnswered = !!answerData;
 
   return (
-    <div className="flex flex-col items-center mt-10">
-      <div className="text-xl font-semibold">{quizTitle}</div>
-      <div className="text-muted-foreground">
+    <div
+      className="flex flex-col items-center h-screen pt-10"
+      style={{
+        backgroundImage: "url('/assets/images/decoration/pink-bg.png')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="font-semibold text-gray-200 text-2xl">{quizTitle}</div>
+      <div className="text-gray-200">
         answered: {Object.keys(answered).length}/{questions.length}
       </div>
 
@@ -125,7 +157,7 @@ export default function QuizAttemptPage() {
             <div
               key={q.id}
               className={cn(
-                "w-72 min-h-72 rounded-xl bg-blue-100 p-4 shadow-lg transition-transform duration-500 border-4 border-mygreenish",
+                "w-72 min-h-72 rounded-xl bg-white p-4 shadow-lg transition-transform duration-500 border-8 border-gray-300",
                 offset === -1 && "scale-90 translate-x-[0%] blur-sm",
                 offset === 0 && "scale-100 z-10",
                 offset === 1 && "scale-90 translate-x-[0%] blur-sm",
@@ -156,27 +188,66 @@ export default function QuizAttemptPage() {
                     ))}
                   </div>
                   {!isAnswered && (
-                    <Button onClick={handleSubmit} className="mt-4 w-full">
+                    <Button
+                      onClick={handleSubmit}
+                      className="mt-4 w-full bg-[#af4375] font-bold"
+                    >
                       Submit
                     </Button>
                   )}
                 </div>
               ) : (
-                <div className="text-center">
-                  <p className="text-lg mb-2 font-medium">
-                    {answerData?.result?.correct_options.every((opt) =>
-                      answerData.selected.includes(opt)
-                    )
-                      ? "✅ Correct!"
-                      : "❌ Incorrect"}
-                  </p>
-                  <p>
-                    Correct Answer:{" "}
-                    {answerData?.result?.correct_options.join(", ")}
-                  </p>
-                  <Button onClick={handleNext} className="mt-4">
-                    Next
-                  </Button>
+                // <div className="text-center">
+                //   <p className="text-lg mb-2 font-medium">
+                //     {answerData?.result?.correct_options.every((opt) =>
+                //       answerData.selected.includes(opt)
+                //     )
+                //       ? "✅ Correct!"
+                //       : "❌ Incorrect"}
+                //   </p>
+                //   <p>
+                //     Correct Answer:{" "}
+                //     {answerData?.result?.correct_options.join(", ")}
+                //   </p>
+                //   <Button onClick={handleNext} className="mt-4 bg-[#af4375] font-bold">
+                //     Next
+                //   </Button>
+                // </div>
+                <div className="text-center relative">
+                  {answerData?.result?.correct_options.every((opt) =>
+                    answerData.selected.includes(opt)
+                  ) && (
+                    <div className="absolute -inset-[4.5rem] flex h-72 w-96 items-center justify-center">
+                      <Lottie
+                        animationData={fireworksAnimation}
+                        loop={false}
+                        className="w-[500px] h-[500px]"
+                      />
+                    </div>
+                  )}
+                  <div className="relative z-10 flex flex-col min-h-40 items-center justify-between">
+                    <p className="text-lg mb-2 font-medium">
+                      {answerData?.result?.correct_options.every((opt) =>
+                        answerData.selected.includes(opt)
+                      ) ? (
+                        "✅ Correct!"
+                      ) : (
+                        <p>
+                          <span className="animate-spin">❌</span>Incorrect
+                        </p>
+                      )}
+                    </p>
+                    <p>
+                      Correct Answer:{" "}
+                      {answerData?.result?.correct_options.join(", ")}
+                    </p>
+                    <Button
+                      onClick={handleNext}
+                      className="mt-4 bg-[#af4375] font-bold w-full"
+                    >
+                      Next
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
@@ -198,7 +269,7 @@ export default function QuizAttemptPage() {
       )}
       <Button
         variant="secondary"
-        className="mt-4 bg-mygreenish hover:bg-mygreenish/80 text-white mt-20" 
+        className=" bg-white/20 border-2 rounded-xl border-white hover:bg-[#af4375] text-white mt-20"
         onClick={async () => {
           if (!attemptId) return;
           await finishQuizAttempt(attemptId);

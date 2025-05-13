@@ -14,7 +14,7 @@ const features = [
     description: "Instantly create multiple-choice, true/false and custom quizzes.",
   },
   {
-    title: "Mistake Bank",
+    title: "Work on Mistakes",
     description:
       "Automatically collect wrong answers for targeted revision.",
   },

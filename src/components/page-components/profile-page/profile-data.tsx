@@ -46,6 +46,12 @@ const ProfileData = ({
     },
   });
 
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    window.location.href = "/login";
+  }
+
   const openModal = () => {
     // Reset the form with current profile data when opening the modal
     reset({
@@ -86,7 +92,7 @@ const ProfileData = ({
       toast({
         variant: "destructive",
         title: "Update Failed",
-        description: 'Error, check if every input is filled',
+        description: "Error, check if every input is filled",
       });
     }
   };
@@ -95,9 +101,15 @@ const ProfileData = ({
     <>
       <div className="flex w-full justify-between items-center">
         <h1 className="font-bold text-2xl">Profile</h1>
-        <button onClick={openModal} className="underline font-bold text-lg">
-          edit
-        </button>
+
+        <div className="flex flex-col">
+          <button onClick={openModal} className="underline font-bold text-lg">
+            edit
+          </button>
+          <button onClick={logout} className="underline font-bold text-lg">
+            Log out
+          </button>
+        </div>
       </div>
 
       <div className="w-full flex justify-center items-center gap-5 mt-4 text-[#152759]">
@@ -115,7 +127,6 @@ const ProfileData = ({
         </div>
       </div>
 
-
       <UserLeaderboardStats />
 
       {isModalOpen && (
@@ -130,7 +141,9 @@ const ProfileData = ({
                 <input
                   id="first_name"
                   className="w-full p-2 border rounded"
-                  {...register("first_name", { required: "First name is required" })}
+                  {...register("first_name", {
+                    required: "First name is required",
+                  })}
                 />
                 {errors.first_name && (
                   <p className="text-red-500 text-sm">
@@ -145,7 +158,9 @@ const ProfileData = ({
                 <input
                   id="last_name"
                   className="w-full p-2 border rounded"
-                  {...register("last_name", { required: "Last name is required" })}
+                  {...register("last_name", {
+                    required: "Last name is required",
+                  })}
                 />
                 {errors.last_name && (
                   <p className="text-red-500 text-sm">
@@ -175,10 +190,14 @@ const ProfileData = ({
                   id="password"
                   type="password"
                   className="w-full p-2 border rounded"
-                  {...register("password", { required: "Password is required" })}
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
                 />
                 {errors.password && (
-                  <p className="text-red-500 text-sm">{errors.password.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
               <div className="flex justify-end space-x-2 mt-4">

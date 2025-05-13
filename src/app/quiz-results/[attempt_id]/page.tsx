@@ -44,18 +44,20 @@ export default function QuizResultsPage() {
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 text-gray-700">
         <div>
-          <span className="text-gray-500">Счет:</span>{" "}
+          <span className="text-gray-500">Score:</span>{" "}
           <span className="font-bold">{attempt.score} / {attempt.max_score}</span>
         </div>
         <div>
-          <span className="text-gray-500">Вопросов:</span>{" "}
+          <span className="text-gray-500">Question count:</span>{" "}
           <span className="font-bold">{attempt.questions_count}</span>
         </div>
         <div>
-          <span className="text-gray-500">Время:</span>{" "}
+          <span className="text-gray-500">Time taken:</span>{" "}
           <span className="font-bold">{formatTime(attempt.time_taken_seconds)}</span>
         </div>
       </div>
+
+      <div className="my-4 italic font-bold">Correct answers for the questions are marked like &quot;*&quot;</div>
 
       <div className="space-y-6">
         {attempt.questions.map((q, index) => {
@@ -74,15 +76,16 @@ export default function QuizResultsPage() {
                       className={cn(
                         "px-3 py-2 rounded-md text-sm",
                         opt.is_correct
-                          ? "bg-green-100 text-green-800"
+                          ? "text-green-800"
                           : isUserSelected
                           ? "bg-red-100 text-red-800"
                           : "text-gray-700"
+                          
                       )}
                     >
                       <span className="font-semibold">{opt.label}.</span> {opt.text}
                       {isUserSelected && <Badge variant="outline" className="ml-2">Выбрано</Badge>}
-                      {opt.is_correct && <Badge className="ml-2">Правильно</Badge>}
+                      {opt.is_correct && <Badge className="ml-2 bg-green-500">*</Badge>}
                     </li>
                   );
                 })}

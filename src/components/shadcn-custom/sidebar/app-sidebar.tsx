@@ -21,9 +21,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     navMain: [
       { title: "Home", url: "/home"},
+      { title: "User Ratings", url: "/user-ratings"},
       { title: "Quizzes", url: "/quizzes"},
-      { title: "Mistake Bank", url: "/mistakes"},
-      { title: "Leaderboard", url: "/leaderboard"},
+      { title: "Work on Mistakes", url: "/work-on-mistakes"},
+      { title: "Profile", url: "/profile"},
       // { title: "Admin page", url: "/admin", icon: LockKeyhole },
     ],
   };

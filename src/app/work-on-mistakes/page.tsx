@@ -174,7 +174,7 @@ export default function MistakeQuizPage() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-bold mb-6"
         >
-          Welcome to Your Mistake Bank
+          Welcome to Your Working on Mistakes
         </motion.h1>
         <motion.div
           initial={{ scale: 0.8 }}
@@ -185,7 +185,7 @@ export default function MistakeQuizPage() {
           <Image
             src="/assets/images/decoration/mistake-bank.jpg"
             className="rounded-lg shadow-lg border-4 border-yellow-400"
-            alt="Mistake Bank"
+            alt="Mistake work"
             width={300}
             height={200}
           />

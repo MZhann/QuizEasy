@@ -31,11 +31,11 @@ const slides: Slide[] = [
     imageAlt: "Seamless Quiz Flow",
   },
   {
-    title: "Review & Mistake Bank",
+    title: "Review & Work on Mistakes",
     description: "Automatically collect and master your mistakes.",
     imageSrc: "/assets/images/decoration/review.png",
 
-    imageAlt: "Review & Mistake Bank",
+    imageAlt: "Review & Work on Mistakes",
   },
   {
     title: "Unlimited Topics",

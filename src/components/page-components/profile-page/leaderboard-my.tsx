@@ -41,7 +41,7 @@ const UserLeaderboardStats = () => {
 
   return (
     <>
-      <h2 className="text-xl font-bold text-gray-700 mt-10">Leaderboard info</h2>
+      <h2 className="text-xl font-bold text-gray-700 mt-10">Ranking info</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 pt-0">
         {loading || !stats ? (
           Array.from({ length: 2 }).map((_, idx) => (

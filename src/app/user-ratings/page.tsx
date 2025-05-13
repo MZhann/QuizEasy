@@ -34,7 +34,7 @@ const LeaderboardPage = () => {
       setUsers(data.users);
       setTotalUsers(data.users_count);
     } catch (err) {
-      console.error("Leaderboard fetch error", err);
+      console.error("Ranking fetch error", err);
     } finally {
       setLoading(false);
     }
@@ -67,7 +67,7 @@ const LeaderboardPage = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
+      <h1 className="text-2xl font-bold mb-4">Ranking</h1>
       <div className="flex items-center gap-4 mt-5">
         <Image
           src={"/assets/images/decoration/mini-man.png"}
@@ -120,11 +120,11 @@ const LeaderboardPage = () => {
                         })}
                       >
                         {rank === 1
-                          ? "🥇"
+                          ? "1st"
                           : rank === 2
-                          ? "🥈"
+                          ? "2nd"
                           : rank === 3
-                          ? "🥉"
+                          ? "3rd"
                           : `#${rank}`}
                       </span>
                       <div>

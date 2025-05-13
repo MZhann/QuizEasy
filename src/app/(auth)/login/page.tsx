@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { loginUser } from "@/api/auth";
 import { Button } from "@/components/ui/button";
@@ -63,28 +62,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex w-full pt-28 justify-center min-h-screen bg-[#03174C] relative z-0">
-      <Image  src="/assets/images/decoration/auth-bottom-left.png" className="absolute left-4 bottom-4 -z-10" width={380} height={380} alt='decor' /> 
+    <div className="flex w-full pt-20 justify-center min-h-screen relative z-0" style={{ backgroundImage: "url('/assets/images/decoration/pink-bg.png')" }}>
+      {/* <Image  src="/assets/images/decoration/auth-bottom-left.png" className="absolute left-4 bottom-4 -z-10" width={380} height={380} alt='decor' /> 
       <Image  src="/assets/images/decoration/auth-top-left.png" className="absolute left-5 top-5 -z-10" width={320} height={320} alt='decor' /> 
       <Image  src="/assets/images/decoration/auth-top-right.png" className="absolute right-0 top-0 -z-10" width={350} height={310} alt='decor' /> 
-      <Image  src="/assets/images/decoration/auth-bottom-right.png" className="absolute right-5 bottom-5 -z-10" width={450} height={410} alt='decor' /> 
-      <Card className="w-11/12 sm:w-1/2 md:w-1/3">
+      <Image  src="/assets/images/decoration/auth-bottom-right.png" className="absolute right-5 bottom-5 -z-10" width={450} height={410} alt='decor' />  */}
+      <Card className="w-8/12 sm:w-1/2 md:w-1/3">
         <CardHeader>
-          <CardTitle className="text-2xl text-center font-bold text-white">
-            Login
+          <CardTitle className="text-3xl text-center font-bold text-white">
+            Log In
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-6">
+        <CardContent className="w-10/12 mx-auto">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 mt-6">
             <div>
               <Label htmlFor="email" className="pl-1 text-white">
-                email
+                Enter your email
               </Label>
               <Input
                 id="email"
-                className="border-4 border-mylightblue"
+                className="border-4 border-gray-400"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="user@gmail.com"
                 {...register("email", { required: "Email is required" })}
               />
               {errors.email && (
@@ -93,13 +92,13 @@ export default function LoginPage() {
             </div>
             <div>
               <Label htmlFor="password" className="pl-1 text-white">
-                password
+                Enter your password
               </Label>
               <Input
                 id="password"
                 type="password"
-                className="border-4 border-mylightblue"
-                placeholder="Enter your password"
+                className="border-4 border-gray-400"
+                placeholder="********"
                 {...register("password", { required: "Password is required" })}
               />
               {errors.password && (
@@ -111,18 +110,18 @@ export default function LoginPage() {
             <Button
               type="submit"
               variant="blue"
-              className="w-full h-10 rounded-lg"
+              className="w-full bg-[#DD669D] hover:bg-[#DD669D]/70 h-10 border-4 border-white rounded-lg"
               disabled={isLoading}
             >
-              {isLoading ? <Loader2 className="text-white animate-spin"/> : 'Login'}
+              {isLoading ? <Loader2 className="text-white animate-spin"/> : 'Log in'}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="text-center flex justify-center">
           <p className="text-sm text-white">
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-blue-500 hover:underline">
-              Register here
+            If you are a new user{" "}
+            <Link href="/register" className="text-white underline hover:underline">
+              Sign Up
             </Link>
           </p>
         </CardFooter>
