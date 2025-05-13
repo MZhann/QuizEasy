@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import clsx from "clsx";
-import Image from "next/image";
 
 import { registerUser } from "@/api/auth"; // Update path as needed
 import { useToast } from "@/hooks/use-toast";
@@ -90,19 +89,19 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex w-full pt-28 justify-center min-h-screen bg-[#03174C] relative z-0">
-      <Image src="/assets/images/decoration/auth-bottom-left.png" className="absolute left-4 bottom-4 -z-10" width={380} height={380} alt='decor' /> 
+    <div className="flex w-full pt-20 justify-center min-h-screen bg-[#03174C] relative z-0" style={{ backgroundImage: "url('/assets/images/decoration/pink-bg.png')" }}>
+      {/* <Image src="/assets/images/decoration/auth-bottom-left.png" className="absolute left-4 bottom-4 -z-10" width={380} height={380} alt='decor' /> 
       <Image src="/assets/images/decoration/auth-top-left.png" className="absolute left-5 top-5 -z-10" width={320} height={320} alt='decor' /> 
       <Image src="/assets/images/decoration/auth-top-right.png" className="absolute right-0 top-0 -z-10" width={350} height={310} alt='decor' /> 
-      <Image src="/assets/images/decoration/auth-bottom-right.png" className="absolute right-5 bottom-5 -z-10" width={450} height={410} alt='decor' /> 
-      <Card className="w-11/12 sm:w-1/2 md:w-1/3">
+      <Image src="/assets/images/decoration/auth-bottom-right.png" className="absolute right-5 bottom-5 -z-10" width={450} height={410} alt='decor' />  */}
+      <Card className="w-8/12 sm:w-1/2 md:w-1/3">
         <CardHeader>
-          <CardTitle className="text-2xl text-center font-bold text-white">
+          <CardTitle className="text-3xl text-center font-bold text-white">
             Sign Up
           </CardTitle>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="w-10/12 mx-auto">
           {/* Display which step we're on (optional) */}
           {/* <div className="text-center mt-4">
             <span className="text-sm text-gray-500">{steps[step]}</span>
@@ -117,15 +116,15 @@ export default function RegisterPage() {
           >
             {/* Step 0: Name, Surname */}
             {step === 0 && (
-              <div className="space-y-4 mt-6">
+              <div className="space-y-8 mt-6">
                 <div>
                   <Label htmlFor="name" className="pl-1 text-white">
-                    name
+                    Enter your name
                   </Label>
                   <Input
                     id="name"
-                    placeholder="Your name"
-                    className="border-4 border-mylightblue"
+                    placeholder="name"
+                    className="border-4 border-gray-400"
                     {...register("name", { required: "Name is required" })}
                   />
                   {errors.name && (
@@ -137,11 +136,11 @@ export default function RegisterPage() {
 
                 <div>
                   <Label htmlFor="surname" className="pl-1 text-white">
-                    surname
+                    Enter your surname
                   </Label>
                   <Input
                     id="surname"
-                    className="border-4 border-mylightblue"
+                    className="border-4 border-gray-400"
                     placeholder="Your surname"
                     {...register("surname", {
                       required: "Surname is required",
@@ -161,13 +160,13 @@ export default function RegisterPage() {
               <div className="space-y-4 mt-6">
                 <div>
                   <Label htmlFor="email" className="pl-1 text-white">
-                    email
+                    Enter your email
                   </Label>
                   <Input
                     id="email"
                     type="email"
                     className="border-4 border-mylightblue"
-                    placeholder="Your email"
+                    placeholder="user@gmail.com"
                     {...register("email", { required: "Email is required" })}
                   />
                   {errors.email && (
@@ -179,13 +178,13 @@ export default function RegisterPage() {
 
                 <div>
                   <Label htmlFor="password" className="pl-1 text-white">
-                    password
+                    Create a password
                   </Label>
                   <Input
                     id="password"
                     type="password"
                     className="border-4 border-mylightblue"
-                    placeholder="Your password"
+                    placeholder="******"
                     {...register("password", {
                       required: "Password is required",
                     })}
@@ -216,14 +215,14 @@ export default function RegisterPage() {
                   <span /> // placeholder to maintain spacing
                 )}
 
-                <Button disabled={isLoading} type="submit" variant="blue" className={clsx('h-10 rounded-lg', step==0 && 'w-full')}>
+                <Button disabled={isLoading} type="submit" variant="blue" className={clsx('mt-4 h-10 border-4 border-white rounded-lg bg-[#DD669D] hover:bg-[#DD669D]/70', step==0 && 'w-full')}>
                   {step === totalSteps - 1 ? isLoading ? <Loader2 className="text-white animate-spin"/>  : "Register": "Next"}
                 </Button>
               </div>
               <p className="text-sm text-center w-full mt-3 text-white">
-                Already have an account?{" "}
-                <Link href="/login" className="text-blue-500 hover:underline">
-                  Login
+                You Have an Account?{" "}
+                <Link href="/login" className="text-white underline hover:underline">
+                  Log In
                 </Link>
               </p>
             </div>
