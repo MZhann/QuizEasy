@@ -44,11 +44,11 @@ export default function LoginPage() {
       setIsLoading(true)
       const response = await loginUser(data);
       console.log(response);
-      toast({
-        variant: "success",
-        title: "Login Successful",
-        description: "Welcome back!",
-      });
+      // toast({
+      //   variant: "success",
+      //   title: "Login Successful",
+      //   description: "Welcome back!",
+      // });
       setIsLoading(false)
       router.push("/home"); // Redirect after successful login
     } catch (error) {

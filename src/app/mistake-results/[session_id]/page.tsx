@@ -30,11 +30,13 @@ export default function MistakeResultsPage() {
   if (!results) return <p className="text-center mt-10 text-red-500">Session not found</p>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Mistake Session Results</h1>
+    <div className="max-w-6xl w-full mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">Working On Mistakes Session Results</h1>
       <p className="text-muted-foreground mb-4">
         Session ID: <span className="font-mono text-sm text-gray-800">{results.session_id}</span>
       </p>
+      <p className="text-gray-600 italic font-bold mt-3">Correct answers for the questions are marked with &quot;*&quot;</p>
+      <p className="text-gray-600 italic font-bold mb-4">Your answer marked as  &quot;your choice&quot;</p>
       <div className="space-y-6">
         {results.mistakes.map((question, index) => {
           const isCorrect = question.is_correct;
@@ -55,7 +57,7 @@ export default function MistakeResultsPage() {
                       className={cn(
                         "px-3 py-2 rounded-md text-sm",
                         isCorrectOption
-                          ? "bg-green-100 text-green-800"
+                          ? "text-green-800"
                           : isUserSelected
                           ? "bg-red-100 text-red-800"
                           : "text-gray-700"
@@ -63,7 +65,7 @@ export default function MistakeResultsPage() {
                     >
                       <span className="font-semibold">{opt.label}.</span> {opt.option_text}{" "}
                       {isUserSelected && <Badge variant="outline">Your choice</Badge>}
-                      {isCorrectOption && <Badge className="ml-2">Correct</Badge>}
+                      {isCorrectOption && <Badge className="ml-2 bg-green-500">*</Badge>}
                     </li>
                   );
                 })}
