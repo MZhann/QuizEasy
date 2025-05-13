@@ -83,7 +83,7 @@ const QuizGeneration = () => {
             onChange={() => handleCheckboxChange("multiple_choice")}
             className="accent-[#2f6c89]"
           />
-          Multiple Answer Questions
+          Questions with multiple answers
         </label>
         <label className="flex items-center gap-2">
           <input
